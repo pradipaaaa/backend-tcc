@@ -1,0 +1,60 @@
+# === Workspace level ===
+
+# Kiro spec metadata
+.kiro/.meta.json
+
+# Stitch extracted assets (kept inside zip only)
+/.stitch_extracted/
+
+# === Backend (Laravel) ===
+/backend/vendor/
+/backend/node_modules/
+/backend/public/build/
+/backend/public/hot/
+/backend/storage/*.key
+/backend/storage/app/public/
+/backend/storage/app/private/
+/backend/storage/framework/cache/
+/backend/storage/framework/sessions/
+/backend/storage/framework/testing/
+/backend/storage/framework/views/
+/backend/storage/logs/
+/backend/.env
+/backend/.env.backup
+/backend/.env.local
+/backend/.env.production
+/backend/.phpunit.result.cache
+/backend/.phpunit.cache
+/backend/database/database.sqlite
+/backend/database/*.sqlite-journal
+/backend/composer.phar
+/backend/.php83/
+/backend/php83.zip
+/backend/auth.json
+/backend/.idea/
+/backend/.vscode/
+/backend/Homestead.json
+/backend/Homestead.yaml
+/backend/.fleet/
+
+# === Frontend (Vite) ===
+/web-admin/node_modules/
+/web-admin/dist/
+/web-admin/dist-ssr/
+/web-admin/.local
+/web-admin/.env
+/web-admin/.env.local
+/web-admin/.env.production.local
+/web-admin/.vite/
+/web-admin/coverage/
+/web-admin/*.tsbuildinfo
+
+# === Common ===
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
