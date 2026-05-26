@@ -5,6 +5,8 @@
 
 # Stitch extracted assets (kept inside zip only)
 /.stitch_extracted/
+# Stitch source zip (asset desain, tidak perlu di-repo)
+/stitch_web_admin_antrean_puskesmas_cerdas.zip
 
 # === Backend (Laravel) ===
 /backend/vendor/
