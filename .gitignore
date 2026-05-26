@@ -1,7 +1,7 @@
 # === Workspace level ===
 
-# Kiro spec metadata
-.kiro/.meta.json
+# Kiro spec & metadata
+.kiro/
 
 # Stitch extracted assets (kept inside zip only)
 /.stitch_extracted/
