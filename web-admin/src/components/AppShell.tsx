@@ -12,7 +12,6 @@ import {
   Tv2,
 } from 'lucide-react';
 import { useAppStore } from '@/stores/useAppStore';
-import { useDemoStore } from '@/stores/useDemoStore';
 import { usePolisQuery } from '@/hooks/useReferenceData';
 import { cn } from '@/lib/utils';
 
@@ -33,7 +32,6 @@ const NAV: NavItem[] = [
 export function AppShell({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const { selectedPoliId, clearSelectedPoli } = useAppStore();
-  const demoEnabled = useDemoStore((s) => s.enabled);
   const { data: polis } = usePolisQuery();
   const currentPoli = polis?.find((p) => p.id === selectedPoliId);
 
@@ -110,14 +108,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Top bar + main */}
       <div className="flex-1 md:ml-[240px] flex flex-col min-h-screen">
         <header className="sticky top-0 z-30 h-16 bg-white border-b border-line flex items-center justify-between px-6">
-          <div className="flex items-center gap-3">
-            <div className="text-primary font-bold">Puskesmas Hub</div>
-            {demoEnabled && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-warningTint text-warningInk text-xs font-bold">
-                DEMO MODE
-              </span>
-            )}
-          </div>
+          <div className="text-primary font-bold">Puskesmas Hub</div>
           <div className="flex items-center gap-3">
             <button
               type="button"

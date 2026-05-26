@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db, isFirebaseConfigured } from '@/lib/firebase';
 import type { ActiveQueue } from '@/types';
-import { useDemoStore } from '@/stores/useDemoStore';
 import { useQueuesQuery } from './useQueues';
 
 export interface UseActiveQueueResult {
@@ -15,12 +14,10 @@ export interface UseActiveQueueResult {
 /**
  * Realtime listener Firestore: active_queues/{poliId}.
  *
- * - Demo mode: derive dari useDemoStore (cari booking calling).
- * - Live + Firebase configured: subscribe onSnapshot.
- * - Live + Firebase not configured: derive dari useQueuesQuery (polling fallback).
+ * - Firebase configured: subscribe onSnapshot.
+ * - Firebase not configured: derive dari useQueuesQuery (polling fallback).
  */
 export function useActiveQueue(poliId: number | null): UseActiveQueueResult {
-  const demo = useDemoStore((s) => s.enabled);
   const { data: queues } = useQueuesQuery(poliId);
 
   const [fsData, setFsData] = useState<ActiveQueue | null>(null);
@@ -28,7 +25,7 @@ export function useActiveQueue(poliId: number | null): UseActiveQueueResult {
   const [fsReady, setFsReady] = useState(false);
 
   useEffect(() => {
-    if (demo || !isFirebaseConfigured || !db || poliId == null) {
+    if (!isFirebaseConfigured || !db || poliId == null) {
       setFsData(null);
       setFsError(null);
       setFsReady(false);
@@ -46,7 +43,7 @@ export function useActiveQueue(poliId: number | null): UseActiveQueueResult {
       (err) => setFsError(err as Error),
     );
     return () => unsub();
-  }, [poliId, demo]);
+  }, [poliId]);
 
   const fallback = useMemo<ActiveQueue | null>(() => {
     const calling = queues?.find((b) => b.status === 'calling');
@@ -63,9 +60,6 @@ export function useActiveQueue(poliId: number | null): UseActiveQueueResult {
     };
   }, [queues, poliId]);
 
-  if (demo) {
-    return { data: fallback, error: null, ready: true, configured: false };
-  }
   if (!isFirebaseConfigured) {
     return { data: fallback, error: null, ready: true, configured: false };
   }
