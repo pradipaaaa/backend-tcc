@@ -1,0 +1,16 @@
+.git
+.github
+.env
+.env.*
+node_modules
+vendor
+storage/logs/*.log
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/testing/*
+storage/framework/views/*
+public/build
+public/hot
+.phpunit.cache
+.phpunit.result.cache
+README.md
